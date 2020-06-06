@@ -15,7 +15,7 @@ class TileSet:
         self.grid = [[[[0]*tileSize for _ in range(tileSize)] for __ in range(tileHeight)] for ___ in range(tileWidth)]
         self.pixels = [[[[0]*tileSize for _ in range(tileSize)] for __ in range(tileHeight)] for ___ in range(tileWidth)]
 
-    def bound(self, tx, ty, x, y):
+    def bound(self, tx, ty, x = 0, y = 0):
         return bound(0, tx, self.tileWidth) and bound(0, ty, self.tileHeight) and bound(0, x, self.tileSize) and bound(0, y, self.tileSize)
 
     def createPixel(self, tx, ty, x, y, **kwargs):

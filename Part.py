@@ -20,6 +20,7 @@ def link(tileA, tileB, tileSize, d):
 class Links:
     def __init__(self, tileSet):
         self.tileSet = tileSet
+        self.n = tileSet.tileWidth*tileSet.tileHeight
         self.tileList = [tileSet.grid[tx][ty] for tx in range(tileSet.tileWidth) for ty in range(tileSet.tileHeight)]
         self.links = {}
         self.update()
