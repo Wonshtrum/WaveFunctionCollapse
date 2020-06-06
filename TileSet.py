@@ -6,6 +6,7 @@ def bound(m, x, M):
 
 class TileSet:
     def __init__(self, tileSize, tileWidth, tileHeight, tilePixelSize, spacer = 0, can = None):
+        self.emptyTile = [[5]*tileSize]*tileSize
         self.tileSize = tileSize
         self.tileWidth = tileWidth
         self.tileHeight = tileHeight

@@ -20,27 +20,21 @@ class Picker(View):
         self.tileSet = tileSet
         tileSet.apply(self)
         self.cursor = self.tileSet.createPixel(0, 0, 0, 0, outline = "red", width = 3)
-        self.can.bind("<Motion>", self.move)
-        self.can.bind("<1>", self.rightClick)
-        self.can.bind("<3>", self.leftClick)
         self.mvCallbacks = [self.mvDefault]
         self.rcCallbacks = []
+        self.mcCallbacks = []
         self.lcCallbacks = []
+        self.can.bind("<Motion>", lambda event: self.propagate(event, self.mvCallbacks))
+        self.can.bind("<1>", lambda event: self.propagate(event, self.rcCallbacks))
+        self.can.bind("<2>", lambda event: self.propagate(event, self.mcCallbacks))
+        self.can.bind("<3>", lambda event: self.propagate(event, self.lcCallbacks))
+
+    def propagate(self, event, callbacks):
+        for callback in callbacks:
+            callback(event)
 
     def mvDefault(self, event):
         x, y, inBound = self.tileSet.clamp(event.x, event.y)
         if not(inBound):
             x = y = -self.tileSet.tilePixelSize*2
         self.can.coords(self.cursor, x, y, x+self.tileSet.tilePixelSize, y+self.tileSet.tilePixelSize)
-
-    def move(self, event):
-        for cb in self.mvCallbacks:
-            cb(event)
-
-    def rightClick(self, event):
-        for cb in self.rcCallbacks:
-            cb(event)
-
-    def leftClick(self, event):
-        for cb in self.lcCallbacks:
-            cb(event)
