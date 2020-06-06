@@ -43,8 +43,8 @@ class TileSet:
     def pick(self, x, y):
         x = (x-1)/self.tilePixelSize-self.spacer
         y = (y-1)/self.tilePixelSize-self.spacer
-        tx = x//(self.tileSize+self.spacer)
-        ty = y//(self.tileSize+self.spacer)
+        tx = int(x/(self.tileSize+self.spacer))
+        ty = int(y/(self.tileSize+self.spacer))
         x = int(x-tx*(self.tileSize+self.spacer))
         y = int(y-ty*(self.tileSize+self.spacer))
         return (tx, ty, x, y)

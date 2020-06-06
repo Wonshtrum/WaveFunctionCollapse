@@ -62,3 +62,15 @@ class Proc:
                 self.update(x, y+1)
             if x < 0:
                 self.update(x-1, y)
+
+    def ripple(self, x, y):
+        width = self.tileSet.tileWidth
+        height = self.tileSet.tileHeight
+        if y > 0:
+            self.update(x, y-1)
+        if x < width-1:
+            self.update(x+1, y)
+        if y < height-1:
+            self.update(x, y+1)
+        if x < 0:
+            self.update(x-1, y)
