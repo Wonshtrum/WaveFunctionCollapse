@@ -18,6 +18,7 @@ class Editor:
         self.helperSet = TileSet(tileSet.tileWidth, displaySet.tileWidth, displaySet.tileHeight, tileSet.tilePixelSize, tileSet.spacer)
         self.helperPicker = Picker("Preview", self.helperSet)
         self.helperPicker.rcCallbacks.append(self.setOnHelper)
+        self.helperPicker.mcCallbacks.append(self.solve)
         self.helperPicker.lcCallbacks.append(self.reset)
         
         self.display = displaySet
@@ -55,6 +56,11 @@ class Editor:
             tile = tx*self.tileSet.tileHeight+ty
             for d in range(4):
                 print(self.links.links[tile, d])
+
+    def solve(self, event):
+        self.proc.solve()
+        self.helperSet.updateTiles()
+        self.display.updateTiles()
 
     def setOnHelper(self, event):
         tx, ty, x, y = self.helperSet.pick(event.x, event.y)

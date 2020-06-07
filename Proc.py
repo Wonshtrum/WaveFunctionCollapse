@@ -1,3 +1,5 @@
+from random import choice
+
 UP = 0
 RIGHT = 1
 DOWN = 2
@@ -94,3 +96,20 @@ class Proc:
             self.update(x, y+1)
         if x > 0:
             self.update(x-1, y)
+
+    def solve(self):
+        while True:
+            unclear = []
+            for x in range(self.tileSet.tileWidth):
+                for y in range(self.tileSet.tileHeight):
+                    tiles = self.grid[x][y]
+                    if len(tiles) == 0:
+                        return
+                    elif len(tiles) > 1:
+                        unclear.append((x, y))
+            if not(unclear):
+                return
+            x, y = choice(unclear)
+            self.grid[x][y].remove(choice(self.grid[x][y]))
+            self.updateTile(x, y)
+            self.ripple(x, y)
